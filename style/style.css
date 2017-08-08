@@ -1,10 +1,6 @@
 * {
   box-sizing: border-box; }
 
-.container {
-  width: calc((100% / 12) * 12);
-  max-width: 1200px; }
-
 .row:before,
 .row:after {
   content: "";
@@ -124,6 +120,10 @@
 
   .col-sm-12 {
     width: calc(((100% / 12) * 12) - 40px); } }
+.container {
+  width: calc((100% / 12) * 12);
+  max-width: 1200px; }
+
 .show-blocks div {
   background-color: rgba(11, 81, 177, 0.74);
   text-align: center;

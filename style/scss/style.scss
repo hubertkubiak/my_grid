@@ -1,6 +1,10 @@
+// Variables
 $columns: 12;
 $gutter: 40px;
 $maxWidth: 1200px;
+
+
+// Functions
 @function grid-width($cols, $has-gutter:false) {
     @if $has-gutter {
         @return calc(((100% / #{$columns}) * #{$cols}) - #{$gutter});
@@ -10,15 +14,22 @@ $maxWidth: 1200px;
     }
 }
 
+
+// Mixins
+@mixin columnWidth($gridSize, $i) {
+    .col-#{$gridSize}#{$i} {
+        width: grid-width(#{$i}, true);
+    }
+}
+
+
+// Globals
 * {
     box-sizing: border-box;
 }
 
-.container {
-    width: grid-width(12);
-    max-width: $maxWidth;
-}
 
+// Grid
 .row:before,
 .row:after {
     content: "";
@@ -32,26 +43,28 @@ $maxWidth: 1200px;
     margin: 3px calc(#{$gutter} / 2);
 }
 
+
 @for $i from 1 through $columns {
-    .col-#{$i} {
-        width: grid-width(#{$i}, true);
-    }
+    @include columnWidth('', $i);
 }
 
 @media (max-width: 960px) {
     @for $i from 1 through $columns {
-        .col-md-#{$i} {
-            width: grid-width(#{$i}, true);
-        }
+        @include columnWidth('md-', $i);
     }
 }
 
 @media (max-width: 480px) {
     @for $i from 1 through $columns {
-        .col-sm-#{$i} {
-            width: grid-width(#{$i}, true);
-        }
+        @include columnWidth('sm-', $i);
     }
+}
+
+
+// Local styles
+.container {
+    width: grid-width(12);
+    max-width: $maxWidth;
 }
 
 .show-blocks div {
